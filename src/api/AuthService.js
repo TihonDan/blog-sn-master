@@ -3,8 +3,8 @@ import axios from "axios";
 export default class AuthService {
 
 	static axiosInstance = axios.create({
-		// baseURL: process.env.REACT_APP_API_URL + "/Authenticate",
-		// headers: AuthService.getAuthHeader(),
+		baseURL: process.env.REACT_APP_API_URL + "/Authenticate",
+		headers: AuthService.getAuthHeader(),
 	});
 	static async login(username, password) {
 		const response = await this.axiosInstance.post('/login', {

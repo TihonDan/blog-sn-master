@@ -74,7 +74,6 @@ const CommentBlock = ({ comments, postId, updateComments = () => null }) => {
 				</Modal.Body>
 			</Modal>
 
-
 			<Card className='m-3' border='dark'>
 				<Card.Title className='m-3'>
 					Комментариев: {comments.length}

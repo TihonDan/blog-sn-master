@@ -31,6 +31,7 @@ const RegisterForm = ({ onSuccess, isAdminRegister = false, style }) => {
 			}
 		})
 
+
 	const [regError, setRegError] = useState();
 	useEffect(() => {
 		console.log('fdlngdlkfjnlzgfnkl;')
@@ -185,4 +186,4 @@ const RegisterForm = ({ onSuccess, isAdminRegister = false, style }) => {
 	)
 }
 
-export default RegisterForm;
+export default RegisterForm

@@ -19,15 +19,31 @@ import AllUsersPage from './pages/admin-pages/AllUsersPage';
 import NorFoundPage from './pages/NotFoundPage';
 import { useFetching } from './hooks/useFetching';
 import UsersService from './api/UsersService';
+import CategoriesService from './api/CategoriesService';
 
 function App() {
 
 	const [user, setUser] = useState(null);
-	const [userRatings, setUserRatings] = useState(null);
+	const [userRatings, setUserRatings] = useState(null);	
+	const [categories, setCategories] = useState([]);
 	const [fetchRatings, isRatingsLoading, ratingsError] = useFetching(async (id) => {
 		const response = await UsersService.getRatingsByUserId(id);
 		setUserRatings(response.data)
+	})	
+
+	const [fetchCategories, isLoading, categoriesError] = useFetching(async () => {
+		const response = await CategoriesService.getAll();
+		setCategories(response.data);
 	})
+
+	useEffect(() => {
+		const fetchAPI = async () => {
+			await fetchCategories();
+		}
+		fetchAPI();
+	}, []);
+
+	console.log(categories)
 
 	useEffect(() => {
 		const userAuth = AuthService.getCurrentUserAuth();
@@ -71,7 +87,8 @@ function App() {
 					</Route>
 					<Route path='/admin-page' element={
 						<RequireAdmin>
-							<AdminPanelLayout />
+							<AdminPanelLayout 
+							categories = {categories}/>
 						</RequireAdmin>
 					}>
 						<Route index element={<AdminPage />} />

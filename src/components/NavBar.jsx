@@ -28,6 +28,7 @@ const NavBar = ({ categories, style }) => {
 
 	const { user, setUser, setUserRatings } = useAuth();
 	const [isAdmin, setIsAdmin] = useState(false);
+	const [isUser, setIsUser] = useState(false);
 
 	useEffect(() => {
 		if (user && user.role === 'Admin') {
@@ -35,6 +36,15 @@ const NavBar = ({ categories, style }) => {
 		}
 		else {
 			setIsAdmin(false);
+		}
+	}, [user])
+
+	useEffect(() => {
+		if (user && user.role === 'Admin') {
+			setIsUser(false);
+		}
+		else {
+			setIsUser(true);
 		}
 	}, [user])
 
@@ -82,18 +92,21 @@ const NavBar = ({ categories, style }) => {
 						style={{ width: '30', height: '30' }}
 					/>
 				</Button>
-				<Button
+				{
+					isUser &&
+					<Button
 					className='d-flex'
 					variant="dark"
 					onClick={handleCreatePostModalOpen}
 				>
 					<div className="mt-1 mx-2">
-						Создать пост
+						Создать резюме
 					</div>
 					<img src={create}
 						style={{ width: '30', height: '30' }}
 					/>
-				</Button>
+				    </Button>
+				}
 				<Button
 					variant="dark"
 					onClick={handleLogout}
@@ -198,7 +211,7 @@ const NavBar = ({ categories, style }) => {
 									as={Link}
 									to='/admin-page'
 								>
-									Перейти в админскую панель
+									Добавить вакансию
 								</Button>
 							</div>
 						}
