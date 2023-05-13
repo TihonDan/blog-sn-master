@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import PostList from '../components/PostList'
 import { useFetching } from '../hooks/useFetching';
 import CategoriesService from "../api/CategoriesService";
-import PostBlock from '../components/PostBlock';
+import VakBlock from '../components/VakBlock';
 
 const CategoryPostsPage = () => {
 	const navigate = useNavigate();
@@ -48,7 +48,7 @@ const CategoryPostsPage = () => {
 					{category.description}
 				</Card.Body>
 			</Card>
-			<PostBlock fetchPosts={
+			<VakBlock fetchPosts={
 				async() => await fetchPosts(params.id)} 
 				posts={posts} 
 			/>

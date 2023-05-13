@@ -15,6 +15,7 @@ import Logo from "../icons/logo.svg";
 import RegisterForm from "./RegisterForm";
 import { Link } from "react-router-dom";
 import { CreatePostForm } from "./CreatePostForm";
+import { CreateVakForm } from "./CreateVakForm";
 import LoginForm from "./LoginForm";
 import AuthService from "../api/AuthService";
 import { useAuth } from "../hooks/useAuth";
@@ -52,6 +53,7 @@ const NavBar = ({ categories, style }) => {
 	const [showRegisterModal, setShowRegisterModal] = useState(false);
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [showCreatePostModal, setShowCreatePostModal] = useState(false);
+	const [showCreateVakModal, setShowCreateVakModal] = useState(false);
 	const [expanded, setExpanded] = useState(false);
 
 	const handleLoginModalClose = () => setShowLoginModal(false);
@@ -69,6 +71,12 @@ const NavBar = ({ categories, style }) => {
 	const handleCreatePostModalClose = () => setShowCreatePostModal(false);
 	const handleCreatePostModalOpen = () => {
 		setShowCreatePostModal(true);
+		setExpanded(false);
+	}
+
+	const handleCreateVakModalClose = () => setShowCreateVakModal(false);
+	const handleCreateVakModalOpen = () => {
+		setShowCreateVakModal(true);
 		setExpanded(false);
 	}
 
@@ -147,9 +155,21 @@ const NavBar = ({ categories, style }) => {
 				</Modal.Body>
 			</Modal>
 
+			<Modal size='lg' show={showCreateVakModal} onHide={handleCreateVakModalClose}>
+				<Modal.Header closeButton>
+					<Modal.Title>Создание вакансии</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>			
+					<CreateVakForm
+						onSubmit={handleCreateVakModalClose}
+						maxHeight={400}
+						categories={categories} />
+				</Modal.Body>
+			</Modal>
+
 			<Modal size='lg' show={showCreatePostModal} onHide={handleCreatePostModalClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>Создание новой записи</Modal.Title>
+					<Modal.Title>Создание резюме</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<CreatePostForm
@@ -209,9 +229,16 @@ const NavBar = ({ categories, style }) => {
 									className="mt-1"
 									variant='dark'
 									as={Link}
-									to='/admin-page'
+									to='/register-admin'
 								>
-									Добавить вакансию
+									Панель админа
+								</Button>
+								<Button
+									className="mt-1"
+									variant='dark'
+									onClick={handleCreateVakModalOpen}
+								>
+									Создать вакансию
 								</Button>
 							</div>
 						}

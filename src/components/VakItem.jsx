@@ -9,7 +9,7 @@ import dislike from "../icons/dislike.svg";
 import like from "../icons/like.svg";
 import PostsService from "../api/PostsService";
 
-const PostItem = ({ post }) => {
+const VakItem = ({ post }) => {
 
 	const { user, userRatings, setUserRatings } = useAuth();
 
@@ -94,7 +94,7 @@ const PostItem = ({ post }) => {
 			border='dark'
 			className="m-3"
 		>
-			{/* <Button onClick={handleTest}>Test</Button> */}
+			<Button onClick={handleTest}>Test</Button>
 			<Card.Header>
 				<Card.Title>{currentPost.title}</Card.Title>
 				<div className="d-flex justify-content-between">
@@ -124,7 +124,7 @@ const PostItem = ({ post }) => {
 			<Card.Body
 				style={{ cursor: "pointer" }}
 				onClick={() => {
-					navigate(`/resume/${currentPost.id}`)
+					navigate(`/vak/${currentPost.id}`)
 				}}
 			>
 				<Card.Text>
@@ -168,4 +168,4 @@ const PostItem = ({ post }) => {
 	);
 }
 
-export default PostItem;
+export default VakItem;

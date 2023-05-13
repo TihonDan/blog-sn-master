@@ -20,6 +20,9 @@ import NorFoundPage from './pages/NotFoundPage';
 import { useFetching } from './hooks/useFetching';
 import UsersService from './api/UsersService';
 import CategoriesService from './api/CategoriesService';
+import VakPage from './components/vakPage';
+import TestPage from './components/TestPage';
+
 
 function App() {
 
@@ -63,7 +66,7 @@ function App() {
 	}, [])
 
 	return (
-		<>
+		<>		
 			<AuthContext.Provider
 				value={{
 					user,
@@ -75,8 +78,11 @@ function App() {
 					<Route path='/' element={<Layout />}>
 						<Route index element={<AllPostsPage />} />
 						<Route path='/posts/:id' element={<PostPage />} />
+						<Route path='/vak/:id' element={<VakPage />} />
+						<Route path='/resume/:id' element={<PostPage />} />
 						<Route path='/login' element={<LoginPage />} />
 						<Route path='/category/:id' element={<CategoryPostsPage />} />
+						<Route path='/register-admin' element={<RegisterAdminPage />} />
 						<Route path='/users/:id' element={
 							<RequireAuth>
 								<UserPage />

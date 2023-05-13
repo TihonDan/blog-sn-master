@@ -6,11 +6,11 @@ import { CreatePostForm } from "./CreatePostForm";
 const AdminPanelLayout = (categories) => {
 	return (
 		<>
-			{/* <AdminNavBar />
-			<Outlet /> */}
-			<CreatePostForm
+			<AdminNavBar />
+			<Outlet />
+			{/* <CreatePostForm
 						maxHeight={400}
-						categories={categories} />
+						categories={categories} /> */}
 		</>
 	)
 }

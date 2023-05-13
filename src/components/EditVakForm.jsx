@@ -5,13 +5,15 @@ import { useEditAllow } from '../hooks/useEditAllow';
 import { useFetching } from '../hooks/useFetching';
 import { cutText } from '../utils';
 import PostForm from './PostForm'
+import VakForm from './VakForm';
 
-const EditPostForm = ({ categories, initPost, maxHeight, onSubmit = () => null}) => {
+const EditVakForm = ({ categories, initPost, maxHeight, onSubmit = () => null}) => {
 
 	const [post, setPost] = useState(initPost);
 
 	const [editPost, isEditLoading, editError] = useFetching(async (edittedPost) => {
-		const response = await PostsService.editResume(edittedPost);
+		console.log(post)
+		const response = await PostsService.editPost(edittedPost);
 		console.log('EditPostForm edit post response: ');
 		console.log(response);
 		if (response) {
@@ -33,7 +35,7 @@ const EditPostForm = ({ categories, initPost, maxHeight, onSubmit = () => null})
 	}
 	return (
 		<>
-			<PostForm
+			<VakForm
 				post={post}
 				setPost={setPost}
 				initialValue={initPost}
@@ -49,4 +51,4 @@ const EditPostForm = ({ categories, initPost, maxHeight, onSubmit = () => null})
 	)
 }
 
-export default EditPostForm
+export default EditVakForm

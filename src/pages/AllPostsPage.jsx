@@ -4,7 +4,7 @@ import PostList from "../components/PostList";
 import PostsService from "../api/PostsService";
 import { Spinner } from "react-bootstrap";
 import Loader from "../components/Loader";
-import PostBlock from "../components/PostBlock";
+import VakBlock from "../components/VakBlock";
 
 
 const AllPostsPage = () => {
@@ -23,7 +23,7 @@ const AllPostsPage = () => {
 
 	return (
 		<>
-			<PostBlock
+			<VakBlock
 				posts={posts}
 				fetchPosts={fetchPosts}
 				isPostsLoading={isPostsLoading}

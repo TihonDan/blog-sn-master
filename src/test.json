@@ -1,0 +1,97 @@
+[
+    {
+        "id": "88aec81d-b5b0-45f3-1721-8d41560b02f5",
+        "surname": "Кузнецова",
+        "name": "Мария",
+        "middlename": "Сергеевна",
+        "gender": {
+            "id": "18aec81d-b5b0-45f3-1721-8d41560b02f1",
+            "genderName": "Мужской"
+        },
+        "genderId": "18aec81d-b5b0-45f3-1721-8d41560b02f1",
+        "salary": 60000.0,
+        "phoneNumber": "+79123456789",
+        "email": "marya5@mail.ru",
+        "workExperience": "01.09.2020 - 01.03.2023 ООО 'Рога и копыта'",
+        "education": "Университет ИТМО, Санкт-Петербург, Информатика и вычислительная техника",
+        "description": "Опыт работы в разработке мобильных приложений на Java и Kotlin",
+        "applicationUser": null,
+        "applicationUserId": "88aec81d-b5b0-45f3-8721-8d41560b0222"
+    },
+    {
+        "id": "88aec81d-b5b0-45f3-1721-8d41560b02f4",
+        "surname": "Сидоров",
+        "name": "Сергей",
+        "middlename": "Петрович",
+        "gender": {
+            "id": "18aec81d-b5b0-45f3-1721-8d41560b02f1",
+            "genderName": "Мужской"
+        },
+        "genderId": "18aec81d-b5b0-45f3-1721-8d41560b02f1",
+        "salary": 50000.0,
+        "phoneNumber": "+79001234567",
+        "email": "sergey4@mail.ru",
+        "workExperience": "01.10.2019 - 01.09.2022 ООО 'Рога и копыта'",
+        "education": "Московский государственный университет им. М.В. Ломоносова, Москва, Факультет прикладной математики и информатики",
+        "description": "Опыт работы с Python и MATLAB",
+        "applicationUser": null,
+        "applicationUserId": "88aec81d-b5b0-45f3-8721-8d41560b0111"
+    },
+    {
+        "id": "88aec81d-b5b0-45f3-1721-8d41560b02f3",
+        "surname": "Петрова",
+        "name": "Анна",
+        "middlename": "Ивановна",
+        "gender": {
+            "id": "18aec81d-b5b0-45f3-1721-8d41560b02f1",
+            "genderName": "Мужской"
+        },
+        "genderId": "18aec81d-b5b0-45f3-1721-8d41560b02f1",
+        "salary": 65000.0,
+        "phoneNumber": "+79090909090",
+        "email": "anna3@mail.ru",
+        "workExperience": "15.09.2020 - 10.03.2023 ООО 'Красный Октябрь'",
+        "education": "Университет ИТМО, Санкт-Петербург, Информационные системы и технологии",
+        "description": "Опыт работы в веб-разработке с HTML, CSS, JavaScript",
+        "applicationUser": null,
+        "applicationUserId": "88aec81d-b5b0-45f3-8721-8d41560b0333"
+    },
+    {
+        "id": "88aec81d-b5b0-45f3-1721-8d41560b02f2",
+        "surname": "Иванов",
+        "name": "Иван",
+        "middlename": "Сергеевич",
+        "gender": {
+            "id": "18aec81d-b5b0-45f3-1721-8d41560b02f1",
+            "genderName": "Мужской"
+        },
+        "genderId": "18aec81d-b5b0-45f3-1721-8d41560b02f1",
+        "salary": 55000.0,
+        "phoneNumber": "+79123456789",
+        "email": "ivan2@mail.ru",
+        "workExperience": "01.02.2020 - 01.09.2022 ООО 'Рога и копыта'",
+        "education": "Московский государственный технический университет им. Баумана, Москва, Информатика и вычислительная техника",
+        "description": "Опыт работы с Java, C++ и Python",
+        "applicationUser": null,
+        "applicationUserId": "88aec81d-b5b0-45f3-8721-8d41560b0222"
+    },
+    {
+        "id": "88aec81d-b5b0-45f3-1721-8d41560b02f1",
+        "surname": "Дементьев",
+        "name": "Ваня",
+        "middlename": "Петрович",
+        "gender": {
+            "id": "18aec81d-b5b0-45f3-1721-8d41560b02f1",
+            "genderName": "Мужской"
+        },
+        "genderId": "18aec81d-b5b0-45f3-1721-8d41560b02f1",
+        "salary": 45000.0,
+        "phoneNumber": "+79242453413",
+        "email": "dementiev12@mail.ru",
+        "workExperience": "20.11.2019 - 20.09.2022 Завод имени Ленина",
+        "education": "Университет управления 'ТИСБИ', Казань, ИТ, Программная инженерия",
+        "description": "С 2020 года самостоятельно изучаю C#",
+        "applicationUser": null,
+        "applicationUserId": "88aec81d-b5b0-45f3-8721-8d41560b0222"
+    }
+]

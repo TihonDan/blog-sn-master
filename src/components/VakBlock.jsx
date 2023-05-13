@@ -8,7 +8,7 @@ import PostList from './PostList'
 import PostSearch from './PostSearch';
 import VakList from './VakList';
 
-const PostBlock = ({ posts, fetchPosts, isPostsLoading }) => {
+const VakBlock = ({ posts, fetchPosts, isPostsLoading }) => {
 
 	const [filter, setFilter] = useState('');
 	const [query, setQuery] = useState('');
@@ -40,10 +40,10 @@ const PostBlock = ({ posts, fetchPosts, isPostsLoading }) => {
 					<Loader /> 
 				</div>
 				:
-					<VakList posts={searchedPosts} />
+					<VakList posts={sortedPosts} />
 			}
 		</>
 	)
 }
 
-export default PostBlock
+export default VakBlock
