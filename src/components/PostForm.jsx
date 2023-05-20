@@ -45,9 +45,9 @@ const PostForm = ({
 
 	return (
 		<Form>
-			<Button
+			{/* <Button
 				onClick={handleTest}А
-			>Test</Button>
+			>Test</Button> */}
 			<Form.Group className="mb-3">
 				<Form.Control
 					className='p-3'

@@ -167,7 +167,7 @@ const VakPage = () => {
 
     return (
         <>
-            <Button onClick={handleClick} >Test</Button>
+            {/* <Button onClick={handleClick} >Test</Button> */}
             {
                 isPostDeleted ?
                     <Card className="m-3 p-3">

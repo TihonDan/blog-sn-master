@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Button, CloseButton } from "react-bootstrap";
+import { Card, Button, CloseButton, Modal } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import RatingsService from "../api/RatingsService";
 import { useAuth } from "../hooks/useAuth";
@@ -8,6 +8,9 @@ import { formatDate } from "../utils";
 import dislike from "../icons/dislike.svg";
 import like from "../icons/like.svg";
 import PostsService from "../api/PostsService";
+import UsersService from '../api/UsersService';
+import PostItem from "./PostItem";
+import UserItem from "./UserItem";
 
 const VakItem = ({ post }) => {
 
@@ -85,55 +88,119 @@ const VakItem = ({ post }) => {
 		}
 		setUserRatings(ratings);
 	}
+
+	const [isAdmin, setIsAdmin] = useState(false);
+	const [isUser, setIsUser] = useState(false);
+	const [pageUser, setPageUser] = useState([]);
+	const [postFeed, setPostFeed] = useState([[]]);
+
+	const [fetchUser, userLoading, userError] = useFetching(async (id) => {
+		const response = await UsersService.getById(id);
+		setPageUser(response.data);
+	})
+
+	const [test] = useFetching(async => {
+		fetchPostFeed(currentPost.id)
+		const friends = [];
+		for (let i = 0; i < postFeed.feedbacks.length; i++) {
+			const data = postFeed.feedbacks[i];
+			const feed = {};
+			feed.post = data;
+			friends.push(feed)
+		}
+		setPostFeedTest(friends);
+	})
+
+	const [fetchPostFeed] = useFetching(async (id) => {
+		const responce = await PostsService.getPostsFeedback(id);
+		setPostFeed(responce.data);
+	})
+
+	useEffect(() => {
+		const fetchAPI = async () => {
+			await fetchUser(user.id);
+			await test();
+		}
+		fetchAPI();
+	}, [pageUser]);
+
+	useEffect(() => {
+		if (pageUser && pageUser.role === 'Admin') {
+			setIsAdmin(true);
+		}
+		else {
+			setIsAdmin(false);
+		}
+	}, [pageUser])
+
+	const [postFeedTest, setPostFeedTest] = useState([{}]);
+
+	const [showCreateVakModal, setShowCreateVakModal] = useState(false);
+	const handleCreateVakModalClose = () => setShowCreateVakModal(false);
+	const handleCreateVakModalOpen = () => {
+		console.log('dsfd')
+		setShowCreateVakModal(true);
+		fetchPostFeed(currentPost.id)
+		const friends = [];
+		for (let i = 0; i < postFeed.feedbacks.length; i++) {
+			const data = postFeed.feedbacks[i];
+			const feed = {};
+			feed.post = data;
+			friends.push(feed)
+		}
+		setPostFeedTest(friends);
+	}
+
 	const handleTest = () => {
-		console.log(currentPost)
+		console.log(postFeedTest)
 	}
 
 	return (
-		<Card
-			border='dark'
-			className="m-3"
-		>
-			<Button onClick={handleTest}>Test</Button>
-			<Card.Header>
-				<Card.Title>{currentPost.title}</Card.Title>
-				<div className="d-flex justify-content-between">
-					<div>
-						<Card.Subtitle
-							className="mb-2 text-muted text-sm-left s"
-							style={{ cursor: "pointer", fontSize: subtitleFontSize }}
-							onClick={() => navigate(`/users/${currentPost.applicationUserId}`, {
-								state: { from: location }
-							})}
-						>
-							Автор: {currentPost.name}
-						</Card.Subtitle>
-						<Card.Subtitle
-							className="mb-2 text-muted"
-							style={{ fontSize: subtitleFontSize }}
-						>
-							Опубликовано:
-							{' ' + publishedDate}
-						</Card.Subtitle>
-					</div> 
-					{/* <Link to={currentPost.category ? `/category/${currentPost.category.id}` : '/'}>
+		<>
+			<Card
+				border='dark'
+				className="m-3"
+			>
+				<Button onClick={handleTest}>Test</Button>
+				<Card.Header>
+					<Card.Title>{currentPost.title}</Card.Title>
+					<div className="d-flex justify-content-between">
+						<div>
+							<Card.Subtitle
+								className="mb-2 text-muted text-sm-left s"
+								style={{ cursor: "pointer", fontSize: subtitleFontSize }}
+								onClick={() => navigate(`/users/${currentPost.applicationUserId}`, {
+									state: { from: location }
+								})}
+							>
+								Автор: {currentPost.name}
+							</Card.Subtitle>
+							<Card.Subtitle
+								className="mb-2 text-muted"
+								style={{ fontSize: subtitleFontSize }}
+							>
+								Опубликовано:
+								{' ' + publishedDate}
+							</Card.Subtitle>
+						</div>
+						{/* <Link to={currentPost.category ? `/category/${currentPost.category.id}` : '/'}>
 						{currentPost.category ? currentPost.category.name : 'Нет категории'}    /* Сделать категорию
 					</Link> */}
-				</div>
-			</Card.Header>
-			<Card.Body
-				style={{ cursor: "pointer" }}
-				onClick={() => {
-					navigate(`/vak/${currentPost.id}`)
-				}}
-			>
-				<Card.Text>
-					<span style={{ whiteSpace: 'pre-line' }}>
-						{currentPost.description}
-					</span>
-				</Card.Text>
-			</Card.Body>
-			{/* <Card.Footer className="d-flex justify-content-between">
+					</div>
+				</Card.Header>
+				<Card.Body
+					style={{ cursor: "pointer" }}
+					onClick={() => {
+						navigate(`/vak/${currentPost.id}`)
+					}}
+				>
+					<Card.Text>
+						<span style={{ whiteSpace: 'pre-line' }}>
+							{currentPost.description}
+						</span>
+					</Card.Text>
+				</Card.Body>
+				{/* <Card.Footer className="d-flex justify-content-between">
 				<div>
 					Комментариев: {currentPost.commentsCount}
 				</div>
@@ -164,7 +231,33 @@ const VakItem = ({ post }) => {
 					</Button>
 				</div>
 			</Card.Footer> */}
-		</Card>
+				{
+					isAdmin &&
+					<Card.Footer>
+						<Button
+							onClick={handleCreateVakModalOpen}
+						>Посмотреть отклики</Button>
+					</Card.Footer>
+				}
+			</Card>
+			{
+				<Modal show={showCreateVakModal} onHide={handleCreateVakModalClose}>
+					<Modal.Header closeButton>
+						<Modal.Title>
+							Отклики
+						</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						{postFeedTest.map(post =>
+							<UserItem post = {post.post}/>
+						)}
+					</Modal.Body>
+					<Modal.Footer>
+
+					</Modal.Footer>
+				</Modal>
+			}
+		</>
 	);
 }
 

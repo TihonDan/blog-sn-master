@@ -12,7 +12,9 @@ export const CreatePostForm = ({ categories, maxHeight, onSubmit = () => null })
 
 	const [post, setPost] = useState({});
 	const [createPost, isCreatingLoading, creatingError] = useFetching(async (post) => {
+		debugger;
 		const response = await PostsService.createResume(post);
+		debugger;
 		console.log('CreatePostForm post form response:');
 		console.log(response);
 	})
@@ -38,7 +40,7 @@ export const CreatePostForm = ({ categories, maxHeight, onSubmit = () => null })
 					onSubmit={e => {
 						handleCreatePost(e);
 						onSubmit(e);
-					}}
+					}}										
 				/>
 			</Card>
 		</>

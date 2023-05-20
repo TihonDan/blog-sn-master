@@ -11,6 +11,7 @@ import { useAuth } from '../hooks/useAuth';
 import UsersService from '../api/UsersService';
 import VakBlock from '../components/VakBlock';
 import ResumeBlock from '../components/ResumeBlock';
+import VakItem from '../components/VakItem';
 
 
 const UserPage = () => {
@@ -32,6 +33,7 @@ const UserPage = () => {
 			await fetchUser(params.id);
 			await fetchPosts(params.id);
 			await fetchVak(params.id);
+			await fetchPostFeed(params.id);
 		}
 		fetchAPI();
 	}, [params.id]);
@@ -86,18 +88,17 @@ const UserPage = () => {
 	const [feeded, setFedded] = useState([]);
 
 	const [fetchPostFeed] = useFetching(async (id) => {
-        const response = await UsersService.getFeedByUserId(id);
-        const newFeeded = [];
-        for (let i = 0; i < response.data.length; i++) {
-            const data = response.data[i];
-            const feed = {};
-            feed.id = data.postId;           
-            newFeeded.push(feed);
-        }
-        setFedded(newFeeded);
-        console.log("feeded")
-        console.log(feeded)
-    })
+		const response = await UsersService.getFeedByUserId(id);
+		const newFeeded = [];
+		for (let i = 0; i < response.data.length; i++) {
+			const data = response.data[i];
+			const feed = {};
+			feed.resume = data.post;
+			newFeeded.push(feed);
+		}
+		setFedded(newFeeded);
+		console.log(feeded);
+	})
 
 	const testCheck = () => {
 		console.log(pageUser.id)
@@ -106,7 +107,8 @@ const UserPage = () => {
 
 	return (
 		<>
-			<Button onClick={testCheck}>test</Button>
+			{/* <Button onClick={testCheck}>test</Button> */}
+			{/* <h2>{feeded.map(cat => <option key = {cat.resume.id}>{cat.resume.title}</option>)}</h2> */}
 			<Card className='p-4 m-3'>
 				<h4>
 					{pageUser.userName}
@@ -132,7 +134,7 @@ const UserPage = () => {
 							fetchPosts={async () => await fetchPosts(params.id)}
 							posts={posts}
 						/>
-					</Card.Body>					
+					</Card.Body>
 				</Card>
 			}
 			{
@@ -145,8 +147,8 @@ const UserPage = () => {
 						<VakBlock
 							fetchPosts={async () => await fetchVak(params.id)}
 							posts={posts}
-						/>
-					</Card.Body>
+						/>						
+					</Card.Body>					
 				</Card>
 			}
 			{
@@ -157,9 +159,12 @@ const UserPage = () => {
 						</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<Card>
-							<Card.Body>Тело карты</Card.Body>
-						</Card>
+						{feeded.map(post =>
+							<VakItem
+								key={post.resume.id}
+								post={post.resume}
+							/>
+						)}
 					</Modal.Body>
 					<Modal.Footer>
 

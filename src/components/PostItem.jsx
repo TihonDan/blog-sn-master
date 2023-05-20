@@ -58,6 +58,7 @@ const PostItem = ({ post }) => {
 		}
 	}, [rating])
 	useEffect(() => {
+		debugger
 		if (!userRatings) {
 			setRating(undefined)
 		}

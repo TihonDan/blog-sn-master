@@ -35,6 +35,11 @@ export default class PostsService {
 		console.log(response)
 		return response;
 	}
+
+	static async getPostsFeedback(id){
+		const response = await this.axiosInstanceVak.get(`/${id}`);
+		return response;
+	}
 	static async getByResumeId(id) {
 		const response = await this.axiosInstanceResume.get(`/${id}`);
 		return response;

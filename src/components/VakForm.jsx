@@ -44,9 +44,9 @@ const VakForm = ({
 
 	return (
 		<Form>
-			<Button
+			{/* <Button
 				onClick={handleTest}
-			>Test</Button>
+			>Test</Button> */}
 			<Form.Group className="mb-3">
 				<Form.Control
 					className='p-3'

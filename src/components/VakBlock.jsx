@@ -40,7 +40,7 @@ const VakBlock = ({ posts, fetchPosts, isPostsLoading }) => {
 					<Loader /> 
 				</div>
 				:
-					<VakList posts={sortedPosts} />
+					<VakList posts={sortedPosts} />					
 			}
 		</>
 	)
